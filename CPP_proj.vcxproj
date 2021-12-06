@@ -152,6 +152,7 @@
     <ClCompile Include="09_the_viewport\09_the_viewport\09_the_viewport.cpp" />
     <ClCompile Include="1.cpp" />
     <ClCompile Include="11_clip_rendering_and_sprite_sheets\11_clip_rendering_and_sprite_sheets\11_clip_rendering_and_sprite_sheets.cpp" />
+    <ClCompile Include="background.cpp" />
     <ClCompile Include="block.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameobject.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="background.h" />
     <ClInclude Include="block.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameobject.h" />

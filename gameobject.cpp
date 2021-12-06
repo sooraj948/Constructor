@@ -21,10 +21,10 @@ void GameObject::update()
 	
 	/*destrect.h = 2 * srcrect.h;
 	destrect.w = 2 * srcrect.w;*/
-	destrect.h = 200;
+	/*destrect.h = 200;
 	destrect.w = 200;
 	xpos++;
-	ypos = pow((xpos*xpos - 5*5),0.5);
+	ypos = pow((xpos*xpos - 5*5),0.5);*/
 }
 
 void GameObject::render()

@@ -2,10 +2,12 @@
 #include "texture.h"
 #include "gameobject.h"
 #include "block.h"
+#include "background.h"
 
 //GameObject* player;
 Block* block1;
 SDL_Texture* block;
+Background* bg;
 SDL_Rect srcR, destR;
 //int count = 0;
 Game::Game()
@@ -62,7 +64,12 @@ bool Game::init(const char* title)
 	block = SDL_CreateTextureFromSurface(renderer, tmpsurface);
 	SDL_FreeSurface(tmpsurface);*/
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
+	 
+	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
+	//bg = TextureManager::LoadTexture("images/background.png", renderer);
+	bg = new Background("images/background.png", renderer, 0, 0);
 	block1 = new Block("images/block-rope.png", renderer,410,0);
+	
 	return success;
 }
 
@@ -92,12 +99,14 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
 	block1->render();
+	bg->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game:: update()
 {
 	block1->update(fall);
+	bg->update();
 	/*static int flag = 0;
 	if (count > 500)
 	{
