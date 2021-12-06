@@ -60,6 +60,9 @@
     <ClCompile Include="background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="background.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rope.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

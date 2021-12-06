@@ -157,6 +157,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="my_own.cpp" />
+    <ClCompile Include="rope.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameobject.h" />
+    <ClInclude Include="rope.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="object.h" />
   </ItemGroup>

@@ -12,7 +12,7 @@ Block::Block(const char* texturesheet, SDL_Renderer* ren, int x, int y) :
 	;
 }
 
-void Block::update(bool fall)
+int Block::update(bool fall)
 {
 	//xpos = 0; ypos = 0;
 	srcrect.h = 16;
@@ -65,6 +65,11 @@ void Block::update(bool fall)
 		time_after_press++;
 	}
 	
-	//return ypos;
+	return ypos;
 
 }
+
+//void Block ::render()
+//{
+//	SDL_RenderCopyEx(renderer, objtex, NULL, &destrect, ypos, NULL, SDL_FLIP_NONE);
+//}

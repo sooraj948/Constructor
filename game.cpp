@@ -3,9 +3,11 @@
 #include "gameobject.h"
 #include "block.h"
 #include "background.h"
+#include "rope.h"
 
 //GameObject* player;
 Block* block1;
+Rope* rope;
 SDL_Texture* block;
 Background* bg;
 SDL_Rect srcR, destR;
@@ -69,6 +71,7 @@ bool Game::init(const char* title)
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
 	bg = new Background("images/background.png", renderer, 0, 0);
 	block1 = new Block("images/block-rope.png", renderer,410,0);
+	rope = new Rope("images/hook.png", renderer, 500, 0);
 	
 	return success;
 }
@@ -100,13 +103,15 @@ void Game::render()
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
 	block1->render();
 	bg->render();
+	rope->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game:: update()
 {
-	block1->update(fall);
+	int y = block1->update(fall);
 	bg->update();
+	rope->update(y);
 	/*static int flag = 0;
 	if (count > 500)
 	{
