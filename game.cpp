@@ -1,8 +1,10 @@
 #include "game.h"
 #include "texture.h"
 #include "gameobject.h"
+#include "block.h"
 
-GameObject* player;
+//GameObject* player;
+Block* block1;
 SDL_Texture* block;
 SDL_Rect srcR, destR;
 //int count = 0;
@@ -60,7 +62,7 @@ bool Game::init(const char* title)
 	block = SDL_CreateTextureFromSurface(renderer, tmpsurface);
 	SDL_FreeSurface(tmpsurface);*/
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
-	player = new GameObject("images/block-rope.png", renderer,69,69);
+	block1 = new Block("images/block-rope.png", renderer,410,0);
 	return success;
 }
 
@@ -70,7 +72,7 @@ void Game::handleevents()
 	
 
 	//Event handler
-	SDL_Event e;
+	
 	SDL_PollEvent(&e) ;
 		if (e.type == SDL_QUIT)
 		{
@@ -78,7 +80,7 @@ void Game::handleevents()
 		}
 		if (e.type == SDL_KEYDOWN)
 		{
-			if (e.key.keysym.sym) fall = true;
+			if (e.key.keysym.sym==SDLK_SPACE) fall = true;
 		}
 	
 
@@ -89,13 +91,13 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
-	player->render();
+	block1->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game:: update()
 {
-	player->update();
+	block1->update(fall);
 	/*static int flag = 0;
 	if (count > 500)
 	{

@@ -18,6 +18,8 @@ public:
 	bool running() { return isrunning; }
 	bool init(const char * title);
 	int getcount() { return count; }
+	static SDL_Event e;
+	//bool static fall;
 
 private:
 	bool isrunning=true,fall=false;
