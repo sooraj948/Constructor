@@ -10,6 +10,6 @@ private:
 
 public:
 	Rope(const char* texturesheet, SDL_Renderer* ren, int x, int y);
-	void update(int ypos);
+	void update(float ypos);
 	void render();
 };
