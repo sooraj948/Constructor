@@ -10,6 +10,6 @@ private:
 
 public:
 	Block(const char* texturesheet, SDL_Renderer* ren, int x, int y);
-	int update(bool fall);
+	float update(bool fall);
 	//void render();
 };
