@@ -25,7 +25,7 @@ float Block::update(bool fall)
 
 	destrect.h = 90;
 	destrect.w = 90;
-	float ha;
+	float ha=0;
 	if (!fall)
 	{
 		if (dire == 0)

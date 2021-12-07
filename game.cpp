@@ -101,16 +101,18 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
-	block1->render();
 	bg->render();
+	block1->render();
+	
 	rope->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game:: update()
 {
-	int y = block1->update(fall);
 	bg->update();
+	float y = block1->update(fall);
+	
 	rope->update(y);
 	/*static int flag = 0;
 	if (count > 500)
