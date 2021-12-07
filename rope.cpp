@@ -12,7 +12,7 @@ Rope::Rope(const char* texturesheet, SDL_Renderer* ren, int x, int y) :
 	;
 }
 
-void Rope::update(int y)
+void Rope::update(float y)
 {
 	srcrect.h = 16;
 	srcrect.w = 16;
