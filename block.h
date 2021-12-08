@@ -12,7 +12,7 @@ public:
 	Block(const char* texturesheet, SDL_Renderer* ren, int x, int y);
 	float update(bool fall,SDL_Rect a);
 	//void render();
-	bool checkCollision(SDL_Rect a);
+	bool checkCollision(SDL_Rect a,SDL_Rect b);
 	SDL_Rect getdestrect(); 
 	void setrest() { rest = true; }
 };

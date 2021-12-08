@@ -30,7 +30,8 @@ float Block::update(bool fall,SDL_Rect a)
 	destrect.h = 90;
 	destrect.w = 90;
 	float ha=0;
-	if (!rest || !checkCollision(a))
+	
+	if (!rest || !checkCollision(a,destrect))
 	{
 		destrect.x = xpos;
 		destrect.y = ypos;
@@ -93,6 +94,8 @@ float Block::update(bool fall,SDL_Rect a)
 	else
 	{
 		rest = true;
+		fall = false;
+		destrect.x = xpos;
 
 	}
 	
@@ -103,23 +106,21 @@ float Block::update(bool fall,SDL_Rect a)
 //	SDL_RenderCopyEx(renderer, objtex, NULL, &destrect, ypos, NULL, SDL_FLIP_NONE);
 //}
 
-bool Block:: checkCollision(SDL_Rect a)
+bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
+//https://www.lazyfoo.net/tutorials/SDL/27_collision_detection/index.php
 {
-	//The sides of the rectangles
 	int leftA, leftB;
 	int rightA, rightB;
 	int topA, topB;
 	int bottomA, bottomB;
 
 	//Calculate the sides of rect A
-
 	leftA = a.x;
 	rightA = a.x + a.w;
 	topA = a.y;
 	bottomA = a.y + a.h;
 
 	//Calculate the sides of rect B
-	SDL_Rect b = destrect;
 	leftB = b.x;
 	rightB = b.x + b.w;
 	topB = b.y;
@@ -148,3 +149,65 @@ bool Block:: checkCollision(SDL_Rect a)
 	//If none of the sides from A are outside B
 	return true;
 }
+	////The sides of the rectangles
+	//int leftA, leftB;
+	//int rightA, rightB;
+	//int topA, topB;
+	//int bottomA, bottomB;
+
+	////Calculate the sides of rect A
+
+	//leftA = a.x;
+	//rightA = a.x + a.w;
+	//topA = a.y;
+	//
+	//bottomA = a.y + a.h;
+	///*leftA = destrect.x;
+	//rightA = destrect.x + destrect.w;
+	//topA = destrect.y;
+	//
+	//bottomA = destrect.y + destrect.h;*/
+
+	//////Calculate the sides of rect B
+	//////SDL_Rect b = destrect;
+	//leftB = destrect.x;
+	//cout << "left a is " << leftA << " " << endl;
+	//cout << "left b is " << leftB << " " << endl;
+	//rightB = destrect.x + destrect.w;
+	//topB = destrect.y;
+	//cout << "top a is " << topA << " " << endl;
+	//cout << "top b is " << topB << " " << endl;
+	//bottomB = destrect.y + destrect.h;
+	///*leftB = a.x;
+	//cout << "left a is " << leftA << " " << endl;
+	//cout << "left b is " << leftB << " " << endl;
+	//rightB = a.x + a.w;
+	//topB = a.y;
+	//cout << "top a is " << topA << " " << endl;
+	//cout << "top b is " << topB << " " << endl;
+	//bottomB = a.y + a.h;*/
+
+	////If any of the sides from A are outside of B
+	//if (bottomA <= topB)
+	//{
+	//	return false;
+	//}
+
+	//if (topA >= bottomB)
+	//{
+	//	return false;
+	//}
+
+	//if (rightA <= leftB)
+	//{
+	//	return false;
+	//}
+
+	//if (leftA >= rightB)
+	//{
+	//	return false;
+	//}
+	//if (bottomB <= 400) return true;
+	////If none of the sides from A are outside B
+	//return true;
+//}

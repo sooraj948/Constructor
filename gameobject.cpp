@@ -9,6 +9,8 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren,int x,int y)
 	renderer = ren;
 	objtex = TextureManager::LoadTexture(texturesheet, ren);
 	xpos = x; ypos = y;
+	destrect.x = xpos;
+	destrect.y = ypos;
 }
 
 void GameObject::update()
@@ -18,8 +20,8 @@ void GameObject::update()
 	srcrect.w = 16;
 	srcrect.x = 0;
 	srcrect.y = 0;
-	destrect.x = xpos;
-	destrect.y = ypos;
+	//destrect.x = xpos;
+	//destrect.y = ypos;
 	
 	/*destrect.h = 2 * srcrect.h;
 	destrect.w = 2 * srcrect.w;*/
