@@ -7,10 +7,11 @@ public:
 	~GameObject();
 	void update();
 	void render();
+	SDL_Rect srcrect, destrect;
 protected:
 	int xpos=0, ypos=0;
 	SDL_Texture* objtex;
-	SDL_Rect srcrect, destrect;
+	//SDL_Rect srcrect, destrect;
 	SDL_Renderer* renderer;
 
 

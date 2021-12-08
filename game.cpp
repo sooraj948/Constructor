@@ -4,13 +4,16 @@
 #include "block.h"
 #include "background.h"
 #include "rope.h"
-
+#include <vector>
+#pragma pack(1)
 //GameObject* player;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
 Background* bg;
 SDL_Rect srcR, destR;
+vector <Block*> landed_blocks;
+Block* block2;
 //int count = 0;
 Game::Game()
 {
@@ -70,8 +73,12 @@ bool Game::init(const char* title)
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
 	bg = new Background("images/background.png", renderer, 0, 0);
+	block2 = new Block("images/block-rope.png", renderer, 430, 400);
+	block2->setrest();
+	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer,410,0);
 	rope = new Rope("images/hook.png", renderer, 500, 0);
+	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	
 	return success;
 }
@@ -105,14 +112,24 @@ void Game::render()
 	block1->render();
 	
 	rope->render();
+	/*for (Block* i : landed_blocks)
+	{
+		i->render();
+	}*/
+	block2->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game:: update()
 {
 	bg->update();
-	float y = block1->update(fall);
-	
+	float y = block1->update(fall,landed_blocks[landed_blocks.size()-1]->getdestrect());
+	//float y = block1->update(fall, block2->destrect);
+	//for (Block* i : landed_blocks)
+	//{
+	//	i->update(false,i->getdestrect());//this i am not so sure abt
+	//}
+	block2->update(false, block2->destrect);
 	rope->update(y);
 	/*static int flag = 0;
 	if (count > 500)

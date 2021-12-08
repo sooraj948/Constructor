@@ -9,7 +9,7 @@ Background::Background(const char* texturesheet, SDL_Renderer* ren, int x, int y
 
 void Background::update()
 {
-	//xpos = 0; ypos = 0;
+	xpos = 0; ypos = 0;
 	srcrect.h = 0;
 	srcrect.w = 0;
 	srcrect.x = 0;
