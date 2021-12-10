@@ -123,13 +123,13 @@ void Game::render()
 void Game:: update()
 {
 	bg->update();
-	//float y = block1->update(fall,landed_blocks[landed_blocks.size()-1]->getdestrect());
-	float y = block1->update(fall, block2->destrect);
+	float y = block1->update(fall,landed_blocks[landed_blocks.size()-1]->getdestrect());
+	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
 	//{
 	//	i->update(false,i->getdestrect());//this i am not so sure abt
 	//}
-	block2->update(false, block2->destrect);
+	block2->update(false, block1->destrect);
 	rope->update(y);
 	if (block1->destrect.x == block2->destrect.x) cout << "wtf!" << endl;
 	/*static int flag = 0;

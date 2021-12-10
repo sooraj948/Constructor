@@ -31,7 +31,7 @@ float Block::update(bool fall,SDL_Rect a)
 	destrect.w = 90;
 	float ha=0;
 	
-	if (!rest || !checkCollision(a,destrect))
+	if (!rest && !checkCollision(a,destrect))
 	{
 		destrect.x = xpos;
 		destrect.y = ypos;
@@ -96,6 +96,7 @@ float Block::update(bool fall,SDL_Rect a)
 		rest = true;
 		fall = false;
 		destrect.x = xpos;
+		destrect.y = ypos;
 
 	}
 	
@@ -106,9 +107,21 @@ float Block::update(bool fall,SDL_Rect a)
 //	SDL_RenderCopyEx(renderer, objtex, NULL, &destrect, ypos, NULL, SDL_FLIP_NONE);
 //}
 
+
 bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 //https://www.lazyfoo.net/tutorials/SDL/27_collision_detection/index.php
 {
+	/*if (a.x == b.x) cout << "asas" << endl;
+	if (pow((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y), 0.5) < 76)
+	{
+		cout << "collided" << endl;
+		cout << a.x << " " << b.x << endl;
+		cout << a.y << " " << b.y << endl;
+		return true;
+	}
+	
+	return false;*/
+
 	int leftA, leftB;
 	int rightA, rightB;
 	int topA, topB;
@@ -128,13 +141,23 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 	//If any of the sides from A are outside of B
 	if (bottomA <= topB)
 	{
+		cout << "so" << endl;
 		return false;
 	}
-
-	if (topA >= bottomB)
+	/*if (bottomA >= topB)
 	{
 		return false;
+	}*/
+
+	if (topA +12>= bottomB)
+	{
+		cout << "yu" << endl;
+		return false;
 	}
+	/*if (topA <= bottomB)
+	{
+		return false;
+	}*/
 
 	if (rightA <= leftB)
 	{
