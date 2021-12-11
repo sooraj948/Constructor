@@ -1,9 +1,13 @@
-#include "block.h"
+
 #include "game.h"
 #include <iostream>
+#include <vector>
+#include "block.h"
 using namespace std;
 
 SDL_Event Game::e;
+bool Game::landed = false;
+//vector <Block*> Game::landed_blocks;
 //bool Game::fall;
 
 Block::Block(const char* texturesheet, SDL_Renderer* ren, int x, int y) :
@@ -93,14 +97,24 @@ float Block::update(bool fall,SDL_Rect a)
 	}
 	else
 	{
+		//if (!rest) landed_blocks.push_back(this);
 		rest = true;
 		fall = false;
 		destrect.x = xpos;
 		destrect.y = ypos;
+		//if (!landed)Game::landed_blocks.push_back(this);
+		
+		Game :: landed = true;
+
+		cout << "landed is " << Game::landed << endl;
+		return -1;
 
 	}
+
+	
 	
 }
+
 
 //void Block ::render()
 //{
@@ -172,65 +186,4 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 	//If none of the sides from A are outside B
 	return true;
 }
-	////The sides of the rectangles
-	//int leftA, leftB;
-	//int rightA, rightB;
-	//int topA, topB;
-	//int bottomA, bottomB;
-
-	////Calculate the sides of rect A
-
-	//leftA = a.x;
-	//rightA = a.x + a.w;
-	//topA = a.y;
-	//
-	//bottomA = a.y + a.h;
-	///*leftA = destrect.x;
-	//rightA = destrect.x + destrect.w;
-	//topA = destrect.y;
-	//
-	//bottomA = destrect.y + destrect.h;*/
-
-	//////Calculate the sides of rect B
-	//////SDL_Rect b = destrect;
-	//leftB = destrect.x;
-	//cout << "left a is " << leftA << " " << endl;
-	//cout << "left b is " << leftB << " " << endl;
-	//rightB = destrect.x + destrect.w;
-	//topB = destrect.y;
-	//cout << "top a is " << topA << " " << endl;
-	//cout << "top b is " << topB << " " << endl;
-	//bottomB = destrect.y + destrect.h;
-	///*leftB = a.x;
-	//cout << "left a is " << leftA << " " << endl;
-	//cout << "left b is " << leftB << " " << endl;
-	//rightB = a.x + a.w;
-	//topB = a.y;
-	//cout << "top a is " << topA << " " << endl;
-	//cout << "top b is " << topB << " " << endl;
-	//bottomB = a.y + a.h;*/
-
-	////If any of the sides from A are outside of B
-	//if (bottomA <= topB)
-	//{
-	//	return false;
-	//}
-
-	//if (topA >= bottomB)
-	//{
-	//	return false;
-	//}
-
-	//if (rightA <= leftB)
-	//{
-	//	return false;
-	//}
-
-	//if (leftA >= rightB)
-	//{
-	//	return false;
-	//}
-	//if (bottomB <= 400) return true;
-	////If none of the sides from A are outside B
-	//return true;
-//}
+	

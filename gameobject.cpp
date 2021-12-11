@@ -12,6 +12,10 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren,int x,int y)
 	destrect.x = xpos;
 	destrect.y = ypos;
 }
+GameObject::~GameObject()
+{
+	;
+}
 
 void GameObject::update()
 {

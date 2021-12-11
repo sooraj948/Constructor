@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
-
+#include <vector>
 #include "SDL_image.h"
+//#include "block.h"
+
 using namespace std;
 class Game
 {
@@ -19,7 +21,9 @@ public:
 	bool init(const char * title);
 	int getcount() { return count; }
 	static SDL_Event e;
+	static bool landed;
 	//bool static fall;
+	//static vector <GameObject*> landed_blocks;
 
 private:
 	bool isrunning=true,fall=false;

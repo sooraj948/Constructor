@@ -1,3 +1,4 @@
+#pragma once
 #include "game.h"
 #include "texture.h"
 #include "gameobject.h"
@@ -5,8 +6,8 @@
 #include "background.h"
 #include "rope.h"
 #include <vector>
-#pragma pack(1)
-//GameObject* player;
+//#pragma pack(1)
+
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
@@ -17,6 +18,7 @@ Block* block2;
 //int count = 0;
 Game::Game()
 {
+	landed = false;
 }
 
 Game::~Game()
@@ -79,7 +81,7 @@ bool Game::init(const char* title)
 	block1 = new Block("images/block-rope.png", renderer,410,0);
 	rope = new Rope("images/hook.png", renderer, 500, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
-	
+	landed = false;
 	return success;
 }
 
@@ -116,7 +118,11 @@ void Game::render()
 	{
 		i->render();
 	}*/
-	block2->render();
+	//block2->render();
+	for (Block *b : landed_blocks)
+	{
+		b->render();
+	}
 	SDL_RenderPresent(renderer);
 }
 
@@ -131,7 +137,15 @@ void Game:: update()
 	//}
 	block2->update(false, block1->destrect);
 	rope->update(y);
-	if (block1->destrect.x == block2->destrect.x) cout << "wtf!" << endl;
+	
+	if (y==-1)
+	{
+		landed_blocks.push_back(block1);
+		block1 = new Block("images/block-rope.png", renderer, 410, 0);
+		rope = new Rope("images/hook.png", renderer, 500, 0);
+		fall = false;
+		/*landed = false;*/ 
+	}
 	/*static int flag = 0;
 	if (count > 500)
 	{
@@ -148,3 +162,6 @@ void Game:: update()
 	//destR.y = count;
 	//cout << count;
 }
+
+
+

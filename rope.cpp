@@ -18,7 +18,7 @@ void Rope::update(float y)
 	srcrect.w = 16;
 	srcrect.x = 0;
 	srcrect.y = 0;
-	cout << y << " ";
+	//cout << y << " ";
 	double x = y * 3.14159 / 180;
 	destrect.x = xpos-45*cos(x);
 	dire = y;
