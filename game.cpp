@@ -71,14 +71,14 @@ bool Game::init(const char* title)
 	block = SDL_CreateTextureFromSurface(renderer, tmpsurface);
 	SDL_FreeSurface(tmpsurface);*/
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
-	 
+
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
 	bg = new Background("images/background.png", renderer, 0, 0);
 	block2 = new Block("images/block-rope.png", renderer, 430, 400);
 	block2->setrest();
 	landed_blocks.push_back(block2);
-	block1 = new Block("images/block-rope.png", renderer,410,0);
+	block1 = new Block("images/block-rope.png", renderer, 410, 0);
 	rope = new Rope("images/hook.png", renderer, 500, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
@@ -88,20 +88,20 @@ bool Game::init(const char* title)
 void Game::handleevents()
 {
 	//bool quit = false;
-	
+
 
 	//Event handler
-	
-	SDL_PollEvent(&e) ;
-		if (e.type == SDL_QUIT)
-		{
-			isrunning = false;
-		}
-		if (e.type == SDL_KEYDOWN)
-		{
-			if (e.key.keysym.sym==SDLK_SPACE) fall = true;
-		}
-	
+
+	SDL_PollEvent(&e);
+	if (e.type == SDL_QUIT)
+	{
+		isrunning = false;
+	}
+	if (e.type == SDL_KEYDOWN)
+	{
+		if (e.key.keysym.sym == SDLK_SPACE) fall = true;
+	}
+
 
 }
 
@@ -112,24 +112,24 @@ void Game::render()
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
 	bg->render();
 	block1->render();
-	
+
 	rope->render();
 	/*for (Block* i : landed_blocks)
 	{
 		i->render();
 	}*/
 	//block2->render();
-	for (Block *b : landed_blocks)
+	for (Block* b : landed_blocks)
 	{
 		b->render();
 	}
 	SDL_RenderPresent(renderer);
 }
 
-void Game:: update()
+void Game::update()
 {
 	bg->update();
-	float y = block1->update(fall,landed_blocks[landed_blocks.size()-1]->getdestrect());
+	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect());
 	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
 	//{
@@ -137,14 +137,38 @@ void Game:: update()
 	//}
 	block2->update(false, block1->destrect);
 	rope->update(y);
-	
-	if (y==-1)
+
+	if (y == -1)
 	{
-		landed_blocks.push_back(block1);
+		int a = 0;
+		for (int i = 0; i < landed_blocks.size(); i++)
+		{
+			a += landed_blocks[i]->getdestrect().x;
+		}
+		int Block2 = landed_blocks[landed_blocks.size() - 1]->getdestrect().x;//check this
+		/*int Block2 =0;
+		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
+		*/if (abs(block1->getdestrect().x - Block2) > 45)
+		{
+			cout << "block collapse" << endl;
+			
+		}
+		else {
+			landed_blocks.push_back(block1);
+			a += block1->getdestrect().x;
+			a = a / landed_blocks.size();
+			if (abs(a - landed_blocks[0]->getdestrect().x) > 45)
+			{
+				cout << "building fall" << endl;
+			}
+		}
+
+		
+
 		block1 = new Block("images/block-rope.png", renderer, 410, 0);
 		rope = new Rope("images/hook.png", renderer, 500, 0);
 		fall = false;
-		/*landed = false;*/ 
+		/*landed = false;*/
 	}
 	/*static int flag = 0;
 	if (count > 500)
@@ -152,7 +176,7 @@ void Game:: update()
 		flag = 1;
 	}
 	if (count == 0) flag = 0;
-		
+
 	if (!flag) count++;
 	else count--;
 	destR.h = 300;
@@ -162,6 +186,4 @@ void Game:: update()
 	//destR.y = count;
 	//cout << count;
 }
-
-
 
