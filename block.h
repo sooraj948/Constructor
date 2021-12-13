@@ -17,5 +17,6 @@ public:
 	bool checkCollision(SDL_Rect a,SDL_Rect b);
 	SDL_Rect getdestrect(); 
 	void setrest() { rest = true; }
+	void godown(int y);
 };
 

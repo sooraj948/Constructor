@@ -106,7 +106,7 @@ float Block::update(bool fall,SDL_Rect a)
 		
 		Game :: landed = true;
 
-		cout << "landed is " << Game::landed << endl;
+		//cout << "landed is " << Game::landed << endl;
 		return -1;
 
 	}
@@ -155,7 +155,7 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 	//If any of the sides from A are outside of B
 	if (bottomA <= topB)
 	{
-		cout << "so" << endl;
+		//cout << "so" << endl;
 		return false;
 	}
 	/*if (bottomA >= topB)
@@ -165,7 +165,7 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 
 	if (topA +12>= bottomB)
 	{
-		cout << "yu" << endl;
+		//cout << "yu" << endl;
 		return false;
 	}
 	/*if (topA <= bottomB)
@@ -185,5 +185,11 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 
 	//If none of the sides from A are outside B
 	return true;
+}
+
+void Block ::godown(int y)
+{
+	destrect.y += y;
+
 }
 	

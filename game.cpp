@@ -75,7 +75,7 @@ bool Game::init(const char* title)
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
 	bg = new Background("images/background.png", renderer, 0, 0);
-	block2 = new Block("images/block-rope.png", renderer, 430, 400);
+	block2 = new Block("images/block-rope.png", renderer, 500, 540);
 	block2->setrest();
 	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer, 410, 0);
@@ -114,15 +114,25 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-	/*for (Block* i : landed_blocks)
+	for (Block* i : landed_blocks)
 	{
+		
 		i->render();
-	}*/
+		//i->godown(-100);
+	}
 	//block2->render();
+	
 	for (Block* b : landed_blocks)
 	{
 		b->render();
 	}
+
+	/*for (int i = landed_blocks.size() - 3 ? landed_blocks.size() >= 3 : 0; i < landed_blocks.size(); i++)
+	{
+		landed_blocks[i]->godown(30);
+		landed_blocks[i]->render();
+	}*/
+		
 	SDL_RenderPresent(renderer);
 }
 
@@ -137,8 +147,14 @@ void Game::update()
 	//}
 	block2->update(false, block1->destrect);
 	rope->update(y);
-
-	if (y == -1)
+	if (y > 400)
+	{
+		block1 = new Block("images/block-rope.png", renderer, 410, 0);
+		rope = new Rope("images/hook.png", renderer, 500, 0);
+		fall = false;
+		cout << "inside" << endl;
+	}
+	else if (y == -1)
 	{
 		int a = 0;
 		for (int i = 0; i < landed_blocks.size(); i++)
@@ -161,6 +177,7 @@ void Game::update()
 			{
 				cout << "building fall" << endl;
 			}
+			//e = SDL_QUIT;
 		}
 
 		
