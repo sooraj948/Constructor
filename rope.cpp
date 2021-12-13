@@ -19,14 +19,29 @@ void Rope::update(float y)
 	srcrect.x = 0;
 	srcrect.y = 0;
 	//cout << y << " ";
+	y = ang;
 	double x = y * 3.14159 / 180;
-	destrect.x = xpos-45*cos(x);
-	dire = y;
-	destrect.y =abs( 45*sin(x));
-
-
+	destrect.x = xpos - 45 * cos(x);
+	destrect.y = abs(45 * sin(x));
+	//cout << ang << "a ";
 	destrect.h = 20;
 	destrect.w = 75;
+	if (dire == 0)
+	{
+		ang++;
+	}
+	else {
+		ang--;
+	}
+	if (ang > 180)
+	{
+		dire = 1;
+	}
+	else if (ang < 0)
+	{
+		dire = 0;
+	}
+	
 	/*
 		if (dire == 0)
 		{
@@ -53,5 +68,5 @@ void Rope::update(float y)
 
 void Rope::render()
 {
-	SDL_RenderCopyEx(renderer, objtex, NULL, &destrect,-1*dire, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, objtex, NULL, &destrect, -1 * ang, NULL, SDL_FLIP_NONE);
 }
