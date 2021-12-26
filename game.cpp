@@ -75,7 +75,7 @@ bool Game::init(const char* title)
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
 	bg = new Background("images/background.png", renderer, 0, 0);
-	block2 = new Block("images/block-rope.png", renderer, 500, 540);
+	block2 = new Block("images/block.png", renderer, 430, 400);
 	block2->setrest();
 	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer, 410, 0);
@@ -114,25 +114,15 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-	for (Block* i : landed_blocks)
+	/*for (Block* i : landed_blocks)
 	{
-		
 		i->render();
-		//i->godown(-100);
-	}
+	}*/
 	//block2->render();
-	
 	for (Block* b : landed_blocks)
 	{
 		b->render();
 	}
-
-	/*for (int i = landed_blocks.size() - 3 ? landed_blocks.size() >= 3 : 0; i < landed_blocks.size(); i++)
-	{
-		landed_blocks[i]->godown(30);
-		landed_blocks[i]->render();
-	}*/
-		
 	SDL_RenderPresent(renderer);
 }
 
@@ -147,16 +137,10 @@ void Game::update()
 	//}
 	block2->update(false, block1->destrect);
 	rope->update(y);
-	if (y > 400)
+
+	if (y == -1)
 	{
-		block1 = new Block("images/block-rope.png", renderer, 410, 0);
-		rope = new Rope("images/hook.png", renderer, 500, 0);
-		fall = false;
-		cout << "inside" << endl;
-	}
-	else if (y == -1)
-	{
-		int a = 0;
+		int a = 0,b=0;
 		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
@@ -166,8 +150,13 @@ void Game::update()
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout << "block collapse" << endl;
-			
+			cout <<"block collapse" << endl;
+			lives++;
+			if (lives >= 3)
+			{
+				b = 1;
+				cout << lives << " gamover e";
+			}
 		}
 		else {
 			landed_blocks.push_back(block1);
@@ -175,17 +164,33 @@ void Game::update()
 			a = a / landed_blocks.size();
 			if (abs(a - landed_blocks[0]->getdestrect().x) > 45)
 			{
+				b = 1;
 				cout << "building fall" << endl;
 			}
-			//e = SDL_QUIT;
 		}
 
 		
-
-		block1 = new Block("images/block-rope.png", renderer, 410, 0);
-		rope = new Rope("images/hook.png", renderer, 500, 0);
-		fall = false;
+		if (b == 0) {
+			block1 = new Block("images/block-rope.png", renderer, 410, 0);
+			rope = new Rope("images/hook.png", renderer, 500, 0);
+			fall = false;
+		}
 		/*landed = false;*/
+	}
+	if (y == -2)
+	{
+		int b = 0;
+		lives++;
+		if (lives > 3)
+		{
+			b = 1;
+			cout << "game over t" << endl;
+		}
+		if (b == 0) {
+			block1 = new Block("images/block-rope.png", renderer, 410, 0);
+			rope = new Rope("images/hook.png", renderer, 500, 0);
+			fall = false;
+		}
 	}
 	/*static int flag = 0;
 	if (count > 500)
