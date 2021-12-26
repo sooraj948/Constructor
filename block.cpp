@@ -16,26 +16,26 @@ Block::Block(const char* texturesheet, SDL_Renderer* ren, int x, int y) :
 	;
 }
 
-SDL_Rect Block::getdestrect() 
+SDL_Rect Block::getdestrect()
 {
 	return destrect;
 }
 
 
-float Block::update(bool fall,SDL_Rect a)
+float Block::update(bool fall, SDL_Rect a)
 {
-	
+
 	srcrect.h = 16;
 	srcrect.w = 16;
 	srcrect.x = 0;
 	srcrect.y = 0;
-	
+
 
 	destrect.h = 90;
 	destrect.w = 90;
-	float ha=0;
-	
-	if (!rest && !checkCollision(a,destrect))
+	float ha = 0;
+
+	if (!rest && !checkCollision(a, destrect))
 	{
 		destrect.x = xpos;
 		destrect.y = ypos;
@@ -67,9 +67,13 @@ float Block::update(bool fall,SDL_Rect a)
 		}
 		else
 		{
-
+			if (ypos > 400)
+			{
+				return -2;
+			}
 			ypos = ypos + 0.1 * time_after_press;
 			time_after_press++;
+
 		}
 		float ang;
 		if (dire == 0)
@@ -103,16 +107,15 @@ float Block::update(bool fall,SDL_Rect a)
 		destrect.x = xpos;
 		destrect.y = ypos;
 		//if (!landed)Game::landed_blocks.push_back(this);
-		
-		Game :: landed = true;
 
+		Game::landed = true;
 		//cout << "landed is " << Game::landed << endl;
 		return -1;
 
 	}
 
-	
-	
+
+
 }
 
 
@@ -122,7 +125,7 @@ float Block::update(bool fall,SDL_Rect a)
 //}
 
 
-bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
+bool Block::checkCollision(SDL_Rect a, SDL_Rect b)
 //https://www.lazyfoo.net/tutorials/SDL/27_collision_detection/index.php
 {
 	/*if (a.x == b.x) cout << "asas" << endl;
@@ -133,7 +136,7 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 		cout << a.y << " " << b.y << endl;
 		return true;
 	}
-	
+
 	return false;*/
 
 	int leftA, leftB;
@@ -163,7 +166,7 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 		return false;
 	}*/
 
-	if (topA +12>= bottomB)
+	if (topA + 12 >= bottomB)
 	{
 		//cout << "yu" << endl;
 		return false;
@@ -186,10 +189,3 @@ bool Block:: checkCollision(SDL_Rect a,SDL_Rect b)
 	//If none of the sides from A are outside B
 	return true;
 }
-
-void Block ::godown(int y)
-{
-	destrect.y += y;
-
-}
-	
