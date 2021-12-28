@@ -5,9 +5,12 @@
 #include "block.h"
 #include "background.h"
 #include "rope.h"
+#include "Heart.h"
+#include "gameover.h"
 #include <vector>
 //#pragma pack(1)
-
+Heart* heart1,*heart2,*heart3;
+Gameover* gameover1;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
@@ -80,6 +83,10 @@ bool Game::init(const char* title)
 	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer, 410, 0);
 	rope = new Rope("images/hook.png", renderer, 500, 0);
+	heart1 = new Heart("images/heart.png", renderer, 900, 20);
+	heart2 = new Heart("images/heart.png", renderer, 930, 20);
+	heart3 = new Heart("images/heart.png", renderer, 870, 20);
+	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
 	return success;
@@ -110,7 +117,31 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
+	if (gameover == 0)
+	{
+		gameover1->render();
+		SDL_RenderPresent(renderer);
+		return;
+
+	}
 	bg->render();
+	if (lives == 0)
+	{
+
+		heart1->render();
+		heart2->render();
+		heart3->render();
+	}
+	else if (lives == 1)
+	{
+
+		heart1->render();
+		heart2->render();
+	}
+	else if (lives == 2)
+	{
+		heart1->render();
+	}
 	block1->render();
 
 	rope->render();
@@ -128,6 +159,11 @@ void Game::render()
 
 void Game::update()
 {
+	if (gameover == 0)
+	{
+		gameover1->update();
+		return;
+	}
 	bg->update();
 	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect());
 	//float y = block1->update(fall, block2->destrect);
@@ -135,6 +171,7 @@ void Game::update()
 	//{
 	//	i->update(false,i->getdestrect());//this i am not so sure abt
 	//}
+
 	block2->update(false, block1->destrect);
 	rope->update(y);
 
@@ -156,6 +193,7 @@ void Game::update()
 			{
 				b = 1;
 				cout << lives << " gamover e";
+				gameover = 0;
 			}
 		}
 		else {
@@ -166,6 +204,7 @@ void Game::update()
 			{
 				b = 1;
 				cout << "building fall" << endl;
+				gameover = 0;
 			}
 		}
 
@@ -185,12 +224,31 @@ void Game::update()
 		{
 			b = 1;
 			cout << "game over t" << endl;
+			gameover = 0;
 		}
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
 			fall = false;
 		}
+	}
+	cout << lives << endl;
+	if (lives == 0)
+	{
+		
+		heart1->update();
+		heart2->update();
+		heart3->update();
+	}
+	else if (lives == 1)
+	{
+	
+		heart1->update();
+		heart2->update();
+	}
+	else if (lives == 2)
+	{
+		heart1->update();
 	}
 	/*static int flag = 0;
 	if (count > 500)
