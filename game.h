@@ -33,5 +33,5 @@ private:
 	SDL_Renderer* renderer;
 	const int SCREEN_WIDTH = 1024;
 	const int SCREEN_HEIGHT = 640;
-	int count = 0,lives=0;
+	int count = 0,lives=0,gameover=1;
 };
