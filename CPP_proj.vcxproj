@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\vclib\SDL2-2.0.16\include;C:\vclib\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\vclib\SDL2-2.0.16\lib\x64;C:\vclib\SDL2_image-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\vclib\SDL2_ttf-2.0.15\include;C:\vclib\SDL2-2.0.16\include;C:\vclib\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\vclib\SDL2_ttf-2.0.15\lib\x64;C:\vclib\SDL2-2.0.16\lib\x64;C:\vclib\SDL2_image-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -122,7 +122,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Personal\sooraj\iiitb_sem3\Programming 2\C++\SDL2-devel-2.0.16-VC\SDL2-2.0.16\lib\x64;C:\Personal\sooraj\iiitb_sem3\Programming 2\C++\Project\CPP_proj\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -156,8 +156,11 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameobject.cpp" />
+    <ClCompile Include="Gameover.cpp" />
+    <ClCompile Include="Heart.cpp" />
     <ClCompile Include="my_own.cpp" />
     <ClCompile Include="rope.cpp" />
+    <ClCompile Include="scoreboard.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +168,10 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameobject.h" />
+    <ClInclude Include="gameover.h" />
+    <ClInclude Include="Heart.h" />
     <ClInclude Include="rope.h" />
+    <ClInclude Include="scoreboard.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="object.h" />
   </ItemGroup>

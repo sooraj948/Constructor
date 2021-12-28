@@ -7,8 +7,10 @@
 #include "rope.h"
 #include "Heart.h"
 #include "gameover.h"
+#include "scoreboard.h"
 #include <vector>
 //#pragma pack(1)
+ScoreBoard* scoreboard;
 Heart* heart1,*heart2,*heart3;
 Gameover* gameover1;
 Block* block1;
@@ -86,7 +88,10 @@ bool Game::init(const char* title)
 	heart1 = new Heart("images/heart.png", renderer, 900, 20);
 	heart2 = new Heart("images/heart.png", renderer, 930, 20);
 	heart3 = new Heart("images/heart.png", renderer, 870, 20);
+
 	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
+
+	scoreboard = new ScoreBoard("0", renderer, 100, 100);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
 	return success;
@@ -149,11 +154,12 @@ void Game::render()
 	{
 		i->render();
 	}*/
-	//block2->render();
+	block2->render();
 	for (Block* b : landed_blocks)
 	{
 		b->render();
 	}
+	scoreboard->render();
 	SDL_RenderPresent(renderer);
 }
 
@@ -174,7 +180,7 @@ void Game::update()
 
 	block2->update(false, block1->destrect);
 	rope->update(y);
-
+	scoreboard->update();
 	if (y == -1)
 	{
 		int a = 0,b=0;
@@ -212,6 +218,8 @@ void Game::update()
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
+			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 100, 100);
 			fall = false;
 		}
 		/*landed = false;*/
@@ -229,10 +237,11 @@ void Game::update()
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 100, 100);
 			fall = false;
 		}
 	}
-	cout << lives << endl;
+	//cout << lives << endl;
 	if (lives == 0)
 	{
 		

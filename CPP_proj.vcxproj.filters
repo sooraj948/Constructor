@@ -63,6 +63,15 @@
     <ClCompile Include="rope.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -84,6 +93,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="rope.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreboard.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameover.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
