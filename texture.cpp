@@ -24,7 +24,7 @@ SDL_Texture* TextureManager::LoadText(const char* text, SDL_Renderer* renderer)
 		// this is the color in rgb format,
 		// maxing out all would give you the color white,
 		// and it will be your text's color
-		SDL_Color Col = { 255, 255, 0 };
+		SDL_Color Col = { 255, 100, 100 };
 
 		SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, Col);
 		if (textSurface == NULL)

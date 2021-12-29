@@ -97,7 +97,7 @@ bool Game::init(const char* title)
 
 	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
 
-	scoreboard = new ScoreBoard("0", renderer, 100, 100);
+	scoreboard = new ScoreBoard("0", renderer, 0, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
 	return success;
@@ -222,7 +222,7 @@ void Game::update()
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
 			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
-			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 100, 100);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 0, 0);
 			fall = false;
 		}
 		/*landed = false;*/
@@ -240,7 +240,7 @@ void Game::update()
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
-			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 100, 100);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 0, 0);
 			fall = false;
 		}
 	}
