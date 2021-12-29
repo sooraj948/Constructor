@@ -67,7 +67,7 @@ float Block::update(bool fall, SDL_Rect a)
 		}
 		else
 		{
-			if (ypos > 400)
+			if (ypos > 400)//it has fallen to the side. 
 			{
 				return -2;
 			}
@@ -110,7 +110,7 @@ float Block::update(bool fall, SDL_Rect a)
 
 		Game::landed = true;
 		//cout << "landed is " << Game::landed << endl;
-		return -1;
+		return -1;//block landed successfully on the tower
 
 	}
 

@@ -44,6 +44,12 @@ bool Game::init(const char* title)
 	}
 	else
 	{
+
+		if (TTF_Init() == -1) {
+			printf("TTF_Init: %s\n", TTF_GetError());
+			exit(2);
+		}
+
 		//Create window
 		window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == NULL)
@@ -150,11 +156,8 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-	/*for (Block* i : landed_blocks)
-	{
-		i->render();
-	}*/
-	block2->render();
+	
+	//block2->render();
 	for (Block* b : landed_blocks)
 	{
 		b->render();
@@ -193,7 +196,7 @@ void Game::update()
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout <<"block collapse" << endl;
+			cout <<"block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
 			if (lives >= 3)
 			{
