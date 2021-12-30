@@ -13,12 +13,12 @@
 #include <vector>
 //#pragma pack(1)
 ScoreBoard* scoreboard;
-Heart* heart1, * heart2, * heart3;
+Heart* heart1,*heart2,*heart3;
 Gameover* gameover1;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
-Background* bg1, * bg2;
+Background* bg1,*bg2;
 SDL_Rect srcR, destR;
 vector <Block*> landed_blocks;
 Block* block2;
@@ -161,7 +161,7 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-
+	
 	//block2->render();
 	for (Block* b : landed_blocks)
 	{
@@ -192,24 +192,24 @@ void Game::update()
 	scoreboard->update();
 	for (int i = 0; i < landed_blocks.size(); i++)
 	{
-
+		
 		landed_blocks[i]->update(false, block1->destrect);
-
+		
 	}
 	if (y == -1)
 	{
-		int a = 0, b = 0;
+		int a = 0,b=0;
 		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
-
+			
 		}
 		int Block2 = landed_blocks[landed_blocks.size() - 1]->getdestrect().x;//check this
 		/*int Block2 =0;
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout << "block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
+			cout <<"block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
 			if (lives >= 3)
 			{
@@ -242,12 +242,12 @@ void Game::update()
 			}
 		}
 
-
+		
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
 			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
-			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 0, 0);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 0, 0);
 			fall = false;
 		}
 		/*landed = false;*/
@@ -273,14 +273,14 @@ void Game::update()
 	//cout << lives << endl;
 	if (lives == 0)
 	{
-
+		
 		heart1->update();
 		heart2->update();
 		heart3->update();
 	}
 	else if (lives == 1)
 	{
-
+	
 		heart1->update();
 		heart2->update();
 	}
