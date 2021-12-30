@@ -1,4 +1,5 @@
 #pragma once
+
 #include "game.h"
 #include "texture.h"
 #include "gameobject.h"
@@ -8,6 +9,7 @@
 #include "Heart.h"
 #include "gameover.h"
 #include "scoreboard.h"
+#include "music.h"
 #include <vector>
 //#pragma pack(1)
 ScoreBoard* scoreboard;
@@ -16,7 +18,7 @@ Gameover* gameover1;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
-Background* bg;
+Background* bg1,*bg2;
 SDL_Rect srcR, destR;
 vector <Block*> landed_blocks;
 Block* block2;
@@ -85,8 +87,10 @@ bool Game::init(const char* title)
 
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
-	bg = new Background("images/background.png", renderer, 0, 0);
-	block2 = new Block("images/block.png", renderer, 430, 400);
+	mu(0);
+	bg1 = new Background("images/ha.jpg", renderer, 0, 0);
+	bg2 = new Background("images/ha.jpg", renderer, 0, -600);
+	block2 = new Block("images/block.png", renderer, 465, 400);
 	block2->setrest();
 	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer, 410, 0);
@@ -135,7 +139,8 @@ void Game::render()
 		return;
 
 	}
-	bg->render();
+	bg1->render();
+	bg2->render();
 	if (lives == 0)
 	{
 
@@ -173,7 +178,8 @@ void Game::update()
 		gameover1->update();
 		return;
 	}
-	bg->update();
+	bg1->update();
+	bg2->update();
 	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect());
 	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
@@ -210,10 +216,16 @@ void Game::update()
 				b = 1;
 				cout << lives << " gamover e";
 				gameover = 0;
+				mu(3);
 			}
 		}
 		else {
+			mu(1);
 			landed_blocks.push_back(block1);
+			cout << "bg1 " << endl;
+			bg1->godown(50);
+			cout << "bg2 " << endl;
+			bg2->godown(50);
 			for (Block* b : landed_blocks)
 			{
 				b->godown(65);
@@ -226,6 +238,7 @@ void Game::update()
 				b = 1;
 				cout << "building fall" << endl;
 				gameover = 0;
+				mu(3);
 			}
 		}
 
@@ -248,6 +261,7 @@ void Game::update()
 			b = 1;
 			cout << "game over t" << endl;
 			gameover = 0;
+			mu(3);
 		}
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
