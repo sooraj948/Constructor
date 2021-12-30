@@ -189,3 +189,10 @@ bool Block::checkCollision(SDL_Rect a, SDL_Rect b)
 	//If none of the sides from A are outside B
 	return true;
 }
+
+void Block ::godown(int y)
+{
+	ypos += y;
+	
+
+}

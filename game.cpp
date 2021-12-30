@@ -181,15 +181,22 @@ void Game::update()
 	//	i->update(false,i->getdestrect());//this i am not so sure abt
 	//}
 
-	block2->update(false, block1->destrect);
+	//block2->update(false, block1->destrect);
 	rope->update(y);
 	scoreboard->update();
+	for (int i = 0; i < landed_blocks.size(); i++)
+	{
+		
+		landed_blocks[i]->update(false, block1->destrect);
+		
+	}
 	if (y == -1)
 	{
 		int a = 0,b=0;
 		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
+			
 		}
 		int Block2 = landed_blocks[landed_blocks.size() - 1]->getdestrect().x;//check this
 		/*int Block2 =0;
@@ -207,6 +214,11 @@ void Game::update()
 		}
 		else {
 			landed_blocks.push_back(block1);
+			for (Block* b : landed_blocks)
+			{
+				b->godown(65);
+			}
+
 			a += block1->getdestrect().x;
 			a = a / landed_blocks.size();
 			if (abs(a - landed_blocks[0]->getdestrect().x) > 45)
