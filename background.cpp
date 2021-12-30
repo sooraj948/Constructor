@@ -15,7 +15,7 @@ void Background::update()
 	srcrect.x = 0;
 	srcrect.y = 0;
 	destrect.x = xpos;
-	destrect.y = ypos;
+	destrect.y = a;
 
 	/*destrect.h = srcrect.h;
 	destrect.w =  srcrect.w;*/
@@ -24,5 +24,11 @@ void Background::update()
 	
 
 	//return ypos;
+
+}
+void Background::godown(int y)
+{
+	a += y;
+
 
 }
