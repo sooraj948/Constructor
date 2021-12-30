@@ -1,4 +1,5 @@
 #pragma once
+
 #include "game.h"
 #include "texture.h"
 #include "gameobject.h"
@@ -8,15 +9,16 @@
 #include "Heart.h"
 #include "gameover.h"
 #include "scoreboard.h"
+#include "music.h"
 #include <vector>
 //#pragma pack(1)
 ScoreBoard* scoreboard;
-Heart* heart1,*heart2,*heart3;
+Heart* heart1, * heart2, * heart3;
 Gameover* gameover1;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
-Background* bg;
+Background* bg1, * bg2;
 SDL_Rect srcR, destR;
 vector <Block*> landed_blocks;
 Block* block2;
@@ -26,26 +28,29 @@ Game::Game()
 	landed = false;
 }
 
-
-//#include "block.h"
-
-using namespace std;
-class Game
+Game::~Game()
 {
-public:
-	Game();
-	~Game();
-	void handleevents();
-	void update();
-	void render();
-	bool running() { return isrunning; }
-	bool init(const char* title);
-	int getcount() { return count; }
-	static SDL_Event e;
-	static bool landed;
+}
 
-	//bool static fall;
-	//static vector <GameObject*> landed_blocks;
+bool Game::init(const char* title)
+{
+
+	//Initialization flag
+	bool success = true;
+
+	//Initialize SDL
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+		success = false;
+	}
+	else
+	{
+
+		if (TTF_Init() == -1) {
+			printf("TTF_Init: %s\n", TTF_GetError());
+			exit(2);
+		}
 
 		//Create window
 		window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -82,8 +87,10 @@ public:
 
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
-	bg = new Background("images/background.png", renderer, 0, 0);
-	block2 = new Block("images/block.png", renderer, 430, 400);
+	mu(0);
+	bg1 = new Background("images/ha.jpg", renderer, 0, 0);
+	bg2 = new Background("images/ha.jpg", renderer, 0, -600);
+	block2 = new Block("images/block.png", renderer, 465, 400);
 	block2->setrest();
 	landed_blocks.push_back(block2);
 	block1 = new Block("images/block-rope.png", renderer, 410, 0);
@@ -132,7 +139,8 @@ void Game::render()
 		return;
 
 	}
-	bg->render();
+	bg1->render();
+	bg2->render();
 	if (lives == 0)
 	{
 
@@ -153,7 +161,7 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-	
+
 	//block2->render();
 	for (Block* b : landed_blocks)
 	{
@@ -170,7 +178,8 @@ void Game::update()
 		gameover1->update();
 		return;
 	}
-	bg->update();
+	bg1->update();
+	bg2->update();
 	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect());
 	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
@@ -183,34 +192,40 @@ void Game::update()
 	scoreboard->update();
 	for (int i = 0; i < landed_blocks.size(); i++)
 	{
-		
+
 		landed_blocks[i]->update(false, block1->destrect);
-		
+
 	}
 	if (y == -1)
 	{
-		int a = 0,b=0;
+		int a = 0, b = 0;
 		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
-			
+
 		}
 		int Block2 = landed_blocks[landed_blocks.size() - 1]->getdestrect().x;//check this
 		/*int Block2 =0;
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout <<"block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
+			cout << "block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
 			if (lives >= 3)
 			{
 				b = 1;
 				cout << lives << " gamover e";
 				gameover = 0;
+				mu(3);
 			}
 		}
 		else {
+			mu(1);
 			landed_blocks.push_back(block1);
+			cout << "bg1 " << endl;
+			bg1->godown(50);
+			cout << "bg2 " << endl;
+			bg2->godown(50);
 			for (Block* b : landed_blocks)
 			{
 				b->godown(65);
@@ -223,15 +238,16 @@ void Game::update()
 				b = 1;
 				cout << "building fall" << endl;
 				gameover = 0;
+				mu(3);
 			}
 		}
 
-		
+
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
 			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
-			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 0, 0);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 0, 0);
 			fall = false;
 		}
 		/*landed = false;*/
@@ -245,6 +261,7 @@ void Game::update()
 			b = 1;
 			cout << "game over t" << endl;
 			gameover = 0;
+			mu(3);
 		}
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
@@ -256,14 +273,14 @@ void Game::update()
 	//cout << lives << endl;
 	if (lives == 0)
 	{
-		
+
 		heart1->update();
 		heart2->update();
 		heart3->update();
 	}
 	else if (lives == 1)
 	{
-	
+
 		heart1->update();
 		heart2->update();
 	}
