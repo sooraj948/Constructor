@@ -199,7 +199,7 @@ void Game::update()
 	if (y == -1)
 	{
 		int a = 0,b=0;
-		for (int i = 0; i < landed_blocks.size(); i++)
+		for (int i = 0; i < landed_blocks.size(); i++ )
 		{
 			a += landed_blocks[i]->getdestrect().x;
 			
