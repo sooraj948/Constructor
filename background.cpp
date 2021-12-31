@@ -9,17 +9,22 @@ Background::Background(const char* texturesheet, SDL_Renderer* ren, int x, int y
 
 void Background::update()
 {
-	xpos = 0; ypos = 0;
+	
 	srcrect.h = 0;
 	srcrect.w = 0;
 	srcrect.x = 0;
 	srcrect.y = 0;
 	destrect.x = xpos;
-	destrect.y = a;
+	destrect.y = ypos;
+	if (ypos == 600)
+	{
+		ypos = -600;
+	}
 
+	
 	/*destrect.h = srcrect.h;
 	destrect.w =  srcrect.w;*/
-	destrect.h = 1000;
+	destrect.h = 600;
 	destrect.w = 1000;
 	
 
@@ -28,7 +33,7 @@ void Background::update()
 }
 void Background::godown(int y)
 {
-	a += y;
+	ypos += y;
 
-
+	cout << ypos << endl;
 }
