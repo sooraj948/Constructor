@@ -87,7 +87,7 @@ bool Game::init(const char* title)
 
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
-	mu(0);
+	
 	bg1 = new Background("images/ha.jpg", renderer, 0, 0);
 	bg2 = new Background("images/ha.jpg", renderer, 0, -600);
 	block2 = new Block("images/block.png", renderer, 465, 400);
@@ -211,6 +211,7 @@ void Game::update()
 		{
 			cout <<"block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
+			mu(0);
 			if (lives >= 3)
 			{
 				b = 1;
@@ -220,7 +221,13 @@ void Game::update()
 			}
 		}
 		else {
-			mu(1);
+			if ((abs(block1->getdestrect().x - Block2) <= 10))
+			{
+				mu(2);
+			}
+			else {
+				mu(1);
+			}
 			landed_blocks.push_back(block1);
 			cout << "bg1 " << endl;
 			bg1->godown(50);
