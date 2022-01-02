@@ -22,7 +22,7 @@ SDL_Rect Block::getdestrect()
 }
 
 
-float Block::update(bool fall, SDL_Rect a)
+float Block::update(bool fall, SDL_Rect a,int v)
 {
 
 	srcrect.h = 16;
@@ -44,10 +44,10 @@ float Block::update(bool fall, SDL_Rect a)
 		{
 			if (dire == 0)
 			{
-				xpos++;
+				xpos+=v;
 			}
 			else {
-				xpos--;
+				xpos-=v;
 			}
 			if (xpos > 590)
 			{
