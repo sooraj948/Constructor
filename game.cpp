@@ -173,6 +173,15 @@ void Game::render()
 
 void Game::update()
 {
+	int v;
+	if (landed_blocks.size() > 10)
+	{
+		v = 2;
+	}
+	else
+	{
+		v = 1;
+	}
 	if (gameover == 0)
 	{
 		gameover1->update();
@@ -180,7 +189,7 @@ void Game::update()
 	}
 	bg1->update();
 	bg2->update();
-	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect());
+	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect(),v);
 	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
 	//{
@@ -188,18 +197,18 @@ void Game::update()
 	//}
 
 	//block2->update(false, block1->destrect);
-	rope->update(y);
+	rope->update(y,v);
 	scoreboard->update();
 	for (int i = 0; i < landed_blocks.size(); i++)
 	{
 		
-		landed_blocks[i]->update(false, block1->destrect);
+		landed_blocks[i]->update(false, block1->destrect,v);
 		
 	}
 	if (y == -1)
 	{
 		int a = 0,b=0;
-		for (int i = 0; i < landed_blocks.size(); i++ )
+		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
 			
