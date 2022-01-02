@@ -5,8 +5,8 @@ https://github.com/sooraj948/Constructor/tree/master
 # Team and Contributions
 1. Sooraj Sathish (IMT2020004): Wrote all base classes and derived classes. Did collision and also the scoreboard part. Also did block scrolling
 2. Vivek Tangudu (IMT2020110): Worked on the rope and swinging. Also did background scrolling,logic for lives and gameover.
-3. Yugaan M Hagargi - IMT2020536
-4. Mukul Gupta - IMT2020083
+3. Yugaan M Hagargi (IMT2020536): Worked on highscore
+4. Mukul Gupta (IMT2020083): Worked on highscore
 5. Chandra Karthik - IMT2020106
 
 # Features of the Game
