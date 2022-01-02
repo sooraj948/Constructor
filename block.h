@@ -12,7 +12,7 @@ private:
 	vector <Block*> landed_blocks;
 public:
 	Block(const char* texturesheet, SDL_Renderer* ren, int x, int y);
-	float update(bool fall,SDL_Rect a);
+	float update(bool fall,SDL_Rect a,int v);
 	//void render();
 	bool checkCollision(SDL_Rect a,SDL_Rect b);
 	SDL_Rect getdestrect(); 
