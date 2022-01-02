@@ -11,10 +11,13 @@
 #include "scoreboard.h"
 #include "music.h"
 #include "fstream"
+#include "Display.h"
+#include <string>
 #include <vector>
 //#pragma pack(1)
 ScoreBoard* scoreboard;
 Heart* heart1, * heart2, * heart3;
+Display* dis1, * dis2, * dis3, * dis4;
 Gameover* gameover1;
 Block* block1;
 Rope* rope;
@@ -101,7 +104,10 @@ bool Game::init(const char* title)
 	heart3 = new Heart("images/heart.png", renderer, 870, 20);
 
 	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
-
+	dis1 = new Display("High score", renderer, 0, 00);
+	dis3 = new Display("0", renderer, 800, 600);
+	dis4 = new Display("Score", renderer, 400, 600);
+	dis2 = new Display("Scorwe", renderer, 700, 600);
 	scoreboard = new ScoreBoard("0", renderer, 0, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
@@ -135,7 +141,12 @@ void Game::render()
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
 	if (gameover == 0)
 	{
+		dis1->render();
+		dis2->render();
+		dis3->render();
+		dis4->render();
 		gameover1->render();
+
 		SDL_RenderPresent(renderer);
 		return;
 
@@ -185,7 +196,12 @@ void Game::update()
 	}
 	if (gameover == 0)
 	{
+		dis1->update();
+		dis2->update();
+		dis3->update();
+		dis4->update();
 		gameover1->update();
+
 		return;
 	}
 	bg1->update();
