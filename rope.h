@@ -2,8 +2,7 @@
 #include "gameobject.h"
 
 
-class Rope : public GameObject#pragma once
-#include "gameobject.h"
+
 
 
 class Rope : public GameObject
