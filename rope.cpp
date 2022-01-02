@@ -12,7 +12,7 @@ Rope::Rope(const char* texturesheet, SDL_Renderer* ren, int x, int y) :
 	;
 }
 
-void Rope::update(float y)
+void Rope::update(float y,int v)
 {
 	srcrect.h = 16;
 	srcrect.w = 16;
@@ -28,10 +28,10 @@ void Rope::update(float y)
 	destrect.w = 75;
 	if (dire == 0)
 	{
-		ang++;
+		ang+=v;
 	}
 	else {
-		ang--;
+		ang-=v;
 	}
 	if (ang > 180)
 	{
