@@ -4,11 +4,12 @@
 #include "block.h"
 #include "Display.h"
 using namespace std;
-Display::Display(const char* text, SDL_Renderer* ren, int x, int y) :
+Display::Display(const char* text, SDL_Renderer* ren, int x, int y,int w) :
 	GameObject(text, ren, x, y)
 {
 	destrect = { 0 };
 	srcrect = { 0 };
+	destrect.w = w;
 	renderer = ren;
 	objtex = TextureManager::LoadText(text, ren);
 	xpos = x; ypos = y;
@@ -30,7 +31,7 @@ float Display::update()
 
 
 	destrect.h = 90;
-	destrect.w = 90;
+	//destrect.w = 90;
 	destrect.x = xpos;
 	destrect.y = ypos;
 	return 0;
