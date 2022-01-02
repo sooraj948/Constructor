@@ -17,10 +17,14 @@ We also have a scoreboard that increments by 1 everytime a block lands successfu
 Each player has 3 lives. That is if the player makes the swinging block to fall at the wrong time , he/she loses 1 life. 
 
 # Instructions to run the game
-1. Visual studio(Windows) : Clone the repository and hit build and run. The game window should pop up. Please note that the required libraries-SDL2, SDL-image, SDL_TTf must be installed.
-2. Linux
+ Visual studio(Windows) : Clone the repository and hit build and run. The game window should pop up. Please note that the required libraries-SDL2, SDL-image, SDL_TTf must be installed and set up correctly.
+
 
 # Screenshots
+![During play](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot1.png)
+
+
+![Gameover](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot2.png)
 
 # Instructions
 
