@@ -30,7 +30,7 @@ float ScoreBoard::update()
 
 
 	destrect.h = 90;
-	destrect.w = 90;
+	destrect.w = 60;
 	destrect.x = xpos;
 	destrect.y = ypos;
 	return 0;
