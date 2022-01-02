@@ -24,7 +24,7 @@ Each player has 3 lives. That is if the player makes the swinging block to fall 
 ![During play](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot1.png)
 
 
-![Gameover](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot2.png)
+![Gameover](https://github.com/sooraj948/Constructor/blob/master/images/gameover.png)
 
 # Instructions
 
