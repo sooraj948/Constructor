@@ -16,6 +16,8 @@ We also have a scoreboard that increments by 1 everytime a block lands successfu
 
 Each player has 3 lives. That is if the player makes the swinging block to fall at the wrong time , he/she loses 1 life. 
 
+The speed of the rope and block(while swinging) increases when the score reaches 10.
+
 # Instructions to run the game
  Visual studio(Windows) : Clone the repository and hit build and run. The game window should pop up. Please note that the required libraries-SDL2, SDL-image, SDL_TTf must be installed and set up correctly.
 
