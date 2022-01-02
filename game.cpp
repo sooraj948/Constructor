@@ -102,12 +102,12 @@ bool Game::init(const char* title)
 	heart1 = new Heart("images/heart.png", renderer, 900, 20);
 	heart2 = new Heart("images/heart.png", renderer, 930, 20);
 	heart3 = new Heart("images/heart.png", renderer, 870, 20);
-
+	dis1 = new Display("High score", renderer, 300, 400);
+	dis3 = new Display("0", renderer, 200, 400);//highscore
+	dis4 = new Display("Score", renderer, 300, 200);
+	dis2 = new Display("Scorwe", renderer, 200, 600);//score
 	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
-	dis1 = new Display("High score", renderer, 0, 00);
-	dis3 = new Display("0", renderer, 800, 600);
-	dis4 = new Display("Score", renderer, 400, 600);
-	dis2 = new Display("Scorwe", renderer, 700, 600);
+
 	scoreboard = new ScoreBoard("0", renderer, 0, 0);
 	/*block2 = new Block("images/block-rope.png", renderer, 410, 0);*/
 	landed = false;
@@ -141,12 +141,12 @@ void Game::render()
 	//SDL_RenderCopy(renderer, block,NULL,&destR);
 	if (gameover == 0)
 	{
+	
+		gameover1->render();
 		dis1->render();
 		dis2->render();
 		dis3->render();
 		dis4->render();
-		gameover1->render();
-
 		SDL_RenderPresent(renderer);
 		return;
 
@@ -196,6 +196,7 @@ void Game::update()
 	}
 	if (gameover == 0)
 	{
+		gameover1->update();
 		dis1->update();
 		dis2->update();
 		dis3->update();
@@ -246,6 +247,9 @@ void Game::update()
 				std::ifstream input("HighScore.txt");
 				int high_score;
 				input >> high_score;
+				cout << high_score;
+				dis3 = new Display(to_string(high_score).c_str(), renderer, 400, 100);
+				dis2 = new Display(to_string(landed_blocks.size()-1).c_str(), renderer, 100, 300);//score
 				std::ofstream output("HighScore.txt");
 				if (landed_blocks.size() > high_score)
 				{
