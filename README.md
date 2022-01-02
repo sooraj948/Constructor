@@ -28,7 +28,7 @@ The speed of the rope and block(while swinging) increases when the score reaches
 ![During play](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot1.png)
 
 
-![Gameover](https://github.com/sooraj948/Constructor/blob/master/images/gameover.png)
+![Gameover](https://github.com/sooraj948/Constructor/blob/master/images/Screenshot%20(19).png)
 
 # Instructions
 
