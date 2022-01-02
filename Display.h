@@ -8,7 +8,7 @@ class Display : public GameObject
 private:
 
 public:
-	Display(const char* texturesheet, SDL_Renderer* ren, int x, int y);
+	Display(const char* texturesheet, SDL_Renderer* ren, int x, int y,int w);
 	float update();
 	//void render();
 	void render();
