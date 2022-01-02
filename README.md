@@ -2,7 +2,7 @@
 
 # Team and Contributions
 1. Sooraj Sathish (IMT2020004): Wrote all base classes and derived classes. Did collision and also the scoreboard part. Also did block scrolling
-2. Vivek Tangudu (IMT2020110): Worked on the rope and swinging. Also did background scrolling and logic for lives and gameover.
+2. Vivek Tangudu (IMT2020110): Worked on the rope and swinging. Also did background scrolling,logic for lives and gameover.
 3. Yugaan M Hagargi - IMT2020536
 4. Mukul Gupta
 5. Chandra Karthik
