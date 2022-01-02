@@ -1,4 +1,4 @@
-#pragma once
+/**#pragma once
 #include "SDL_mixer.h"
 void mu(int a)
 {
@@ -33,4 +33,4 @@ void mu(int a)
 	}
 
 
-}
+}*/
