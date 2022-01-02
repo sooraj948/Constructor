@@ -3,6 +3,7 @@
 void mu(int a)
 {
 	if (a == 0) {
+		//block drops 
 		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 		Mix_Music* music = Mix_LoadMUS("images/rotate.ogg");
 		Mix_PlayMusic(music, 1);
