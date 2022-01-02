@@ -14,7 +14,7 @@ int main(int argc, char* args[])
 	Uint32 framestart;
 	int frametime;
 	Game *game = new Game();
-	game->init("My own");
+	game->init("Constructor~");
 	while (game->running())
 	{
 		framestart = SDL_GetTicks();
