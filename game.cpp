@@ -102,10 +102,10 @@ bool Game::init(const char* title)
 	heart1 = new Heart("images/heart.png", renderer, 900, 20);
 	heart2 = new Heart("images/heart.png", renderer, 930, 20);
 	heart3 = new Heart("images/heart.png", renderer, 870, 20);
-	dis1 = new Display("High score", renderer, 300, 400);
-	dis3 = new Display("0", renderer, 200, 400);//highscore
-	dis4 = new Display("Score", renderer, 300, 200);
-	dis2 = new Display("Scorwe", renderer, 200, 600);//score
+	dis1 = new Display("High score", renderer, 300, 400,150);
+	dis3 = new Display("0", renderer, 200, 400,90);//highscore
+	dis4 = new Display("Score", renderer, 300, 100,90);
+	dis2 = new Display("Scorwe", renderer, 200, 600,100);//score
 	gameover1 = new Gameover("images/gameover.png", renderer, 0, 0);
 
 	scoreboard = new ScoreBoard("0", renderer, 0, 0);
@@ -185,7 +185,12 @@ void Game::render()
 
 void Game::update()
 {
+	int highscore;
 	int v;
+	std::ifstream input("HighScore.txt");
+	int high_score;
+	input >> high_score;
+	highscore = high_score;
 	if (landed_blocks.size() > 10)
 	{
 		v = 2;
@@ -202,6 +207,7 @@ void Game::update()
 		dis3->update();
 		dis4->update();
 		gameover1->update();
+
 
 		return;
 	}
@@ -236,26 +242,15 @@ void Game::update()
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout << "block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
+			//cout << "block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
 			mu(0);
 			if (lives >= 3)
 			{
 				b = 1;
-				cout << lives << " gamover e";
+				//cout << lives << " gamover e";
 				gameover = 0;
-				std::ifstream input("HighScore.txt");
-				int high_score;
-				input >> high_score;
-				cout << high_score;
-				dis3 = new Display(to_string(high_score).c_str(), renderer, 400, 100);
-				dis2 = new Display(to_string(landed_blocks.size()-1).c_str(), renderer, 100, 300);//score
-				std::ofstream output("HighScore.txt");
-				if (landed_blocks.size() > high_score)
-				{
-					output << landed_blocks.size();
-				}
-				cout << landed_blocks.size() << endl;
+
 				mu(3);
 			}
 		}
@@ -268,9 +263,9 @@ void Game::update()
 				mu(1);
 			}
 			landed_blocks.push_back(block1);
-			cout << "bg1 " << endl;
+			//cout << "bg1 " << endl;
 			bg1->godown(50);
-			cout << "bg2 " << endl;
+			//cout << "bg2 " << endl;
 			bg2->godown(50);
 			for (Block* b : landed_blocks)
 			{
@@ -282,17 +277,9 @@ void Game::update()
 			if (abs(a - landed_blocks[0]->getdestrect().x) > 45)
 			{
 				b = 1;
-				cout << "building fall" << endl;
+				//cout << "building fall" << endl;
 				gameover = 0;
-				std::ifstream input("HighScore.txt");
-				int high_score;
-				input >> high_score;
-				std::ofstream output("HighScore.txt");
-				if (landed_blocks.size() > high_score)
-				{
-					output << landed_blocks.size();
-				}
-				cout << landed_blocks.size() << endl;
+
 				mu(3);
 			}
 		}
@@ -301,7 +288,7 @@ void Game::update()
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
-			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
+			//cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
 			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 0, 0);
 			fall = false;
 		}
@@ -311,20 +298,12 @@ void Game::update()
 	{
 		int b = 0;
 		lives++;
-		if (lives > 3)
+		if (lives >= 3)
 		{
 			b = 1;
-			cout << "game over t" << endl;
+			//cout << "game over t" << endl;
 			gameover = 0;
-			std::ifstream input("HighScore.txt");
-			int high_score;
-			input >> high_score;
-			std::ofstream output("HighScore.txt");
-			if (landed_blocks.size() > high_score)
-			{
-				output << landed_blocks.size();
-			}
-			cout << landed_blocks.size() << endl;
+
 			mu(3);
 		}
 		if (b == 0) {
@@ -352,6 +331,15 @@ void Game::update()
 	{
 		heart1->update();
 	}
+	if (landed_blocks.size() - 1 > high_score)
+	{
+		highscore = landed_blocks.size() - 1;
+		std::ofstream output("HighScore.txt");
+		output << landed_blocks.size() - 1;
+	}
+	dis3 = new Display(to_string(highscore).c_str(), renderer, 500, 400, 60);
+	dis2 = new Display(to_string(landed_blocks.size() - 1).c_str(), renderer, 500, 100, 60);//score
+
 	/*static int flag = 0;
 	if (count > 500)
 	{
