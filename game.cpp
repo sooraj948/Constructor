@@ -10,15 +10,16 @@
 #include "gameover.h"
 #include "scoreboard.h"
 #include "music.h"
+#include "fstream"
 #include <vector>
 //#pragma pack(1)
 ScoreBoard* scoreboard;
-Heart* heart1,*heart2,*heart3;
+Heart* heart1, * heart2, * heart3;
 Gameover* gameover1;
 Block* block1;
 Rope* rope;
 SDL_Texture* block;
-Background* bg1,*bg2;
+Background* bg1, * bg2;
 SDL_Rect srcR, destR;
 vector <Block*> landed_blocks;
 Block* block2;
@@ -87,7 +88,7 @@ bool Game::init(const char* title)
 
 	//block = TextureManager::LoadTexture("images/block_paint.png",renderer);
 	//bg = TextureManager::LoadTexture("images/background.png", renderer);
-	
+
 	bg1 = new Background("images/ha.jpg", renderer, 0, 0);
 	bg2 = new Background("images/ha.jpg", renderer, 0, -600);
 	block2 = new Block("images/block.png", renderer, 465, 400);
@@ -161,7 +162,7 @@ void Game::render()
 	block1->render();
 
 	rope->render();
-	
+
 	//block2->render();
 	for (Block* b : landed_blocks)
 	{
@@ -189,7 +190,7 @@ void Game::update()
 	}
 	bg1->update();
 	bg2->update();
-	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect(),v);
+	float y = block1->update(fall, landed_blocks[landed_blocks.size() - 1]->getdestrect(), v);
 	//float y = block1->update(fall, block2->destrect);
 	//for (Block* i : landed_blocks)
 	//{
@@ -197,28 +198,28 @@ void Game::update()
 	//}
 
 	//block2->update(false, block1->destrect);
-	rope->update(y,v);
+	rope->update(y, v);
 	scoreboard->update();
 	for (int i = 0; i < landed_blocks.size(); i++)
 	{
-		
-		landed_blocks[i]->update(false, block1->destrect,v);
-		
+
+		landed_blocks[i]->update(false, block1->destrect, v);
+
 	}
 	if (y == -1)
 	{
-		int a = 0,b=0;
+		int a = 0, b = 0;
 		for (int i = 0; i < landed_blocks.size(); i++)
 		{
 			a += landed_blocks[i]->getdestrect().x;
-			
+
 		}
 		int Block2 = landed_blocks[landed_blocks.size() - 1]->getdestrect().x;//check this
 		/*int Block2 =0;
 		if (landed_blocks.size() - 2>=0) Block2 = landed_blocks[landed_blocks.size() - 2]->getdestrect().x;
 		*/if (abs(block1->getdestrect().x - Block2) > 45)
 		{
-			cout <<"block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
+			cout << "block collapse" << endl;//check if the block fell on the side of the previous block and thus could not stay on
 			lives++;
 			mu(0);
 			if (lives >= 3)
@@ -226,6 +227,15 @@ void Game::update()
 				b = 1;
 				cout << lives << " gamover e";
 				gameover = 0;
+				std::ifstream input("HighScore.txt");
+				int high_score;
+				input >> high_score;
+				std::ofstream output("HighScore.txt");
+				if (landed_blocks.size() > high_score)
+				{
+					output << landed_blocks.size();
+				}
+				cout << landed_blocks.size() << endl;
 				mu(3);
 			}
 		}
@@ -254,16 +264,25 @@ void Game::update()
 				b = 1;
 				cout << "building fall" << endl;
 				gameover = 0;
+				std::ifstream input("HighScore.txt");
+				int high_score;
+				input >> high_score;
+				std::ofstream output("HighScore.txt");
+				if (landed_blocks.size() > high_score)
+				{
+					output << landed_blocks.size();
+				}
+				cout << landed_blocks.size() << endl;
 				mu(3);
 			}
 		}
 
-		
+
 		if (b == 0) {
 			block1 = new Block("images/block-rope.png", renderer, 410, 0);
 			rope = new Rope("images/hook.png", renderer, 500, 0);
 			cout << "score " << to_string(landed_blocks.size() - 1).c_str() << endl;
-			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(),renderer, 0, 0);
+			scoreboard = new ScoreBoard(to_string(landed_blocks.size() - 1).c_str(), renderer, 0, 0);
 			fall = false;
 		}
 		/*landed = false;*/
@@ -277,6 +296,15 @@ void Game::update()
 			b = 1;
 			cout << "game over t" << endl;
 			gameover = 0;
+			std::ifstream input("HighScore.txt");
+			int high_score;
+			input >> high_score;
+			std::ofstream output("HighScore.txt");
+			if (landed_blocks.size() > high_score)
+			{
+				output << landed_blocks.size();
+			}
+			cout << landed_blocks.size() << endl;
 			mu(3);
 		}
 		if (b == 0) {
@@ -289,14 +317,14 @@ void Game::update()
 	//cout << lives << endl;
 	if (lives == 0)
 	{
-		
+
 		heart1->update();
 		heart2->update();
 		heart3->update();
 	}
 	else if (lives == 1)
 	{
-	
+
 		heart1->update();
 		heart2->update();
 	}
@@ -310,14 +338,11 @@ void Game::update()
 		flag = 1;
 	}
 	if (count == 0) flag = 0;
-
 	if (!flag) count++;
 	else count--;
 	destR.h = 300;
 	destR.w = 300;
-
 	destR.x = count;*/
 	//destR.y = count;
 	//cout << count;
 }
-
