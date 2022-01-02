@@ -19,7 +19,7 @@ void Gameover::update()
 
 	/*destrect.h = srcrect.h;
 	destrect.w =  srcrect.w;*/
-	destrect.h = 1000;
+	destrect.h = 600;
 	destrect.w = 1000;
 
 
