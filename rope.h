@@ -19,7 +19,7 @@ public:
 	void update(float ypos,int v);
 	void render();
 };
-
+/*
 {
 private:
 	int dire = 0;//for direction
@@ -32,3 +32,4 @@ public:
 	void update(float ypos);
 	void render();
 };
+*/
