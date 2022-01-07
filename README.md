@@ -7,7 +7,7 @@ https://github.com/sooraj948/Constructor/tree/master
 2. Vivek Tangudu (IMT2020110): Worked on the rope and swinging. Also did background scrolling,logic for lives and gameover.
 3. Yugaan M Hagargi (IMT2020536): Worked on highscore
 4. Mukul Gupta (IMT2020083): Worked on highscore
-5. Chandra Karthik (IMT2020106) : Worked on Sound/Music
+5. Chandra Karthik (IMT2020106) : Worked on Sound
 
 # Features of the Game
 The game is basically one of precision and accuracy. The main goal of the game is to stack blocks one on top of the other without making many mistakes and also prevent the tower fro collapsing. Upon detection of the spacebar being pressed down, the swinging rope+hook lets go of a block and the block falls vertically. The player must hit the space bar at the right time for the block to fall on the previos tower blocks.
